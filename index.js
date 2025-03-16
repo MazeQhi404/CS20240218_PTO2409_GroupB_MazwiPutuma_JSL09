@@ -65,4 +65,5 @@ setInterval(getCurrentTime(),1000) //takes a function as its firts parameter and
 navigator.geolocation.getCurrentPosition(position => {
       console.log(position)
 });
- 
+
+//Getting data from the weather API
