@@ -34,15 +34,35 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
      }) 
 
      .then(data => {
-      
+
+           document.getElementById("crypto-top").innerHTML = `
+
+                   <img src=${data.image.small} /> 
+                   <span>${data.name}</span>
+           `
+           // adding the image icon and name 
+
+           document.getElementById("crypto").innerHTML += `
+                    <p>🎯: $${data.market_data.current_price.usd}</p>
+                    <p>📈: $${data.market_data.high_24h.usd} </p>
+                    <p>📉: $${data.market_data.low_24h.usd}</p>
+           `
 
      })
 
      .catch(err => console.log(err))
        
+function getCurrentTime() {
+const date = new Date()
+document.getElementById("time").textContent = date.toLocaleTimeString("en-us", {timeStyle: "short"}) // takes date and formats it to a time string
 
+}
 
+setInterval(getCurrentTime(),1000) //takes a function as its firts parameter and how often you want to run that function as its second parameter
 
+//Weather API
 
-
+navigator.geolocation.getCurrentPosition(position => {
+      console.log(position)
+});
  
