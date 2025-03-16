@@ -63,7 +63,26 @@ setInterval(getCurrentTime(),1000) //takes a function as its firts parameter and
 //Weather API
 
 navigator.geolocation.getCurrentPosition(position => {
-      console.log(position)
+     fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial`)
+           .then(res => {
+                if(!res.ok) {
+                  throw Error ("The weather data is not available")
+                }
+                return res.json()
+           })
+           .then(data => {
+            //console.log(data)
+            const iconURL = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+            document.getElementById("weather").innerHTML =`
+                     <img src=${iconURL} />
+                     <p class= weather-temp>${Math.round(data.main.temp)}°</P>
+                     <p class="weather-city">${date.name}</p>
+            `
+           })
+           .catch(err => console.error(err))
 });
 
-//Getting data from the weather API
+
+
+
+
